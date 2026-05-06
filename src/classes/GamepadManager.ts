@@ -18,9 +18,12 @@ export class GamepadManager {
   private handleGamepad() {
     if(!this.gamepads?.length) return; //Return if no gamepad
 
-    /* this.gamepads.forEach(gamepad => {
-      console.log(gamepad.id)
-      //console.log(gamepad.buttons)
-    }) */
+    this.gamepads.forEach(gamepad => {
+      // console.log(gamepad.id)
+      console.log(gamepad.buttons[0])
+
+      if(gamepad.buttons[0].pressed)
+        console.log('pressed')
+    })
   }
 }
