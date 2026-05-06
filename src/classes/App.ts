@@ -1,10 +1,12 @@
 import * as PIXI from 'pixi.js';
 import { Balle } from './sprites/Balle';
+import { GamepadManager } from './GamepadManager';
 
 
 
 class App {
-	application = new PIXI.Application();
+	application: PIXI.Application = new PIXI.Application();
+	gamepadManager: GamepadManager = new GamepadManager();
 	balle: Balle | undefined;
 
 	constructor() { // par defaut
@@ -18,10 +20,12 @@ class App {
 		this.balle = new Balle(this.application);
 		this.application.stage.addChild(this.balle);
 
-		this.application.ticker.add((time) => {
-			this.balle?.update(time.deltaTime)
-		});
-		
+		this.application.ticker.add((time) => this.update(time.deltaTime));		
+	}
+
+	update(deltaTime: number) {
+		this.gamepadManager.update();
+		this.balle?.update(deltaTime);
 	}
 
 }
